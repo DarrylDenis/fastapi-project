@@ -9,7 +9,7 @@ def create_token(data:dict, expire_minutes=30):
     return jwt.encode(
         to_encode,
         settings.JWT_SECRET_KEY,
-        alogorith= settings.JWT_ALGORITHM
+        algorithm= settings.JWT_ALGORITHM
 
     )
 def verify_token(token:str):
