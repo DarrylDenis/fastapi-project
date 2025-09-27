@@ -5,8 +5,19 @@ from app.middleware.logging_middleware import LoggingMiddleware
 # from app.core.exceptions import register_exception_handlers
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
+from app.cache.redis_cache import redis_client
+
 
 app= FastAPI(title='Car price predictor API')
+
+
+@app.get("/redis-health")
+def redis_health():
+    try:
+        redis_client.ping()
+        return {"status": "ok", "message": "Redis is connected"}
+    except Exception as e:
+        return {"status": "error", "message": str(e)}
 
 @app.exception_handler(Exception)
 async def unhandled_exception_handler(request: Request, exc: Exception):
