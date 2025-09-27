@@ -11,18 +11,11 @@ services:
       - JWT_SECRET_KEY=secret
       - REDIS_URL=redis://default:nE0zpDvs4YUqyCf71of41Qn2GAaeuLQR@redis-18540.c270.us-east-1-3.ec2.redns.redis-cloud.com:18540
     depends_on:
-      - redis
       - prometheus
     networks:
       - backend
 
-  redis:
-    image: redis:alpine
-    container_name: redis1
-    ports:
-      - "6379:6379"
-    networks:
-      - backend
+
 
   prometheus:
     image: prom/prometheus:latest
